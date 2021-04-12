@@ -1,0 +1,37 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}NoteFraisMois index{% endblock %}
+
+{% block body %}
+    <h1>NoteFraisMois index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Mois</th>
+                <th>Montant</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for note_frais_moi in note_frais_mois %}
+            <tr>
+                <td>{{ note_frais_moi.id }}</td>
+                <td>{{ note_frais_moi.mois }}</td>
+                <td>{{ note_frais_moi.montant }}</td>
+                <td>
+                    <a href="{{ path('note_frais_mois_show', {'id': note_frais_moi.id}) }}">show</a>
+                    <a href="{{ path('note_frais_mois_edit', {'id': note_frais_moi.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('note_frais_mois_new') }}">Create new</a>
+{% endblock %}

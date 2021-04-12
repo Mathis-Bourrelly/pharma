@@ -1,0 +1,118 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Frais{% endblock %}
+
+{% block body %}
+    <h1>Frais</h1>
+    <table class="table">
+        <thead>
+        <th>Id</th>
+        <th>Date</th>
+        <th>Montant</th>
+        <th>Distance</th>
+        </thead>
+        <tbody>
+        <tr>
+            <td>{{ frai.id }}</td>
+            <td>{{ frai.date ? frai.date|date('Y-m-d H:i:s') : '' }}</td>
+            <td>{{ frai.total }}</td>
+            <td>{{ frai.km }} km</td>
+        </tr>
+        </tbody>
+    </table>
+    <a href="{{ path('frais_index') }}">back to list</a>
+    <a href="{{ path('frais_edit', {'id': frai.id}) }}">edit</a>
+    {{ include('frais/_delete_form.html.twig') }}
+    <div class="row">
+        <div class="col-sm-6">
+            <p>
+                <a class="btn btn-primary " data-toggle="collapse" href="#collapseKm" role="button"
+                   aria-expanded="false" aria-controls="collapseKm">
+                    Voir Frais kilométrique
+                </a>
+            </p>
+            <div class="collapse" id="collapseKm">
+                <div class="card card-body">
+                    <h1>Frais Kilométrique</h1>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Distance</th>
+                            <th>Cv</th>
+                            <th>Depart</th>
+                            <th>Arrivee</th>
+                            <th>Montant</th>
+                            <th>actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for frais_km in frai.fraiskm %}
+                            <tr>
+                                <td>{{ frais_km.id }}</td>
+                                <td>{{ frais_km.distance }}</td>
+                                <td>{{ frais_km.cv }}</td>
+                                <td>{{ frais_km.depart }}</td>
+                                <td>{{ frais_km.arrivee }}</td>
+                                <td>{{ frais_km.montant }}</td>
+                                <td>
+                                    <a href="{{ path('frais_km_show', {'id': frais_km.id}) }}">show</a>
+                                    <a href="{{ path('frais_km_edit', {'id': frais_km.id}) }}">edit</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="7">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <p>
+                <a class="btn btn-primary" data-toggle="collapse" href="#collapseGen" role="button"
+                   aria-expanded="false" aria-controls="collapseGen">
+                    Voir Frais Générique
+                </a>
+            </p>
+            <div class="collapse" id="collapseGen">
+                <div class="card card-body">
+                    <h1>Frais Générique</h1>
+                    <table class="table">
+                        <thead>
+                        <tr>
+                            <th>Id</th>
+                            <th>Nom</th>
+                            <th>Caregorie</th>
+                            <th>Lieu</th>
+                            <th>Montant</th>
+                            <th>actions</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {% for frais_gen in frai.fraisgen %}
+                            <tr>
+                                <td>{{ frais_gen.id }}</td>
+                                <td>{{ frais_gen.nom }}</td>
+                                <td>{{ frais_gen.categorie }}</td>
+                                <td>{{ frais_gen.lieu }}</td>
+                                <td>{{ frais_gen.montant }}</td>
+                                <td>
+                                    <a href="{{ path('frais_gen_show', {'id': frais_gen.id}) }}">show</a>
+                                    <a href="{{ path('frais_gen_edit', {'id': frais_gen.id}) }}">edit</a>
+                                </td>
+                            </tr>
+                        {% else %}
+                            <tr>
+                                <td colspan="7">no records found</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

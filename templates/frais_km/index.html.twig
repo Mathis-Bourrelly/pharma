@@ -1,0 +1,43 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FraisKm index{% endblock %}
+
+{% block body %}
+    <h1>FraisKm index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Distance</th>
+                <th>Cv</th>
+                <th>Depart</th>
+                <th>Arrivee</th>
+                <th>Montant</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for frais_km in frais_kms %}
+            <tr>
+                <td>{{ frais_km.id }}</td>
+                <td>{{ frais_km.distance }}</td>
+                <td>{{ frais_km.cv }}</td>
+                <td>{{ frais_km.depart }}</td>
+                <td>{{ frais_km.arrivee }}</td>
+                <td>{{ frais_km.montant }}</td>
+                <td>
+                    <a href="{{ path('frais_km_show', {'id': frais_km.id}) }}">show</a>
+                    <a href="{{ path('frais_km_edit', {'id': frais_km.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="7">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('frais_km_new') }}">Create new</a>
+{% endblock %}

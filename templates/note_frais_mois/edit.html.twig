@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Edit NoteFraisMois{% endblock %}
+
+{% block body %}
+    <h1>Edit NoteFraisMois</h1>
+
+    {{ include('note_frais_mois/_form.html.twig', {'button_label': 'Update'}) }}
+
+    <a href="{{ path('note_frais_mois_index') }}">back to list</a>
+
+    {{ include('note_frais_mois/_delete_form.html.twig') }}
+{% endblock %}

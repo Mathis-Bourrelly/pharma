@@ -1,0 +1,38 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FraisGen{% endblock %}
+
+{% block body %}
+    <h1>FraisGen</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ frais_gen.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ frais_gen.nom }}</td>
+            </tr>
+            <tr>
+                <th>Categorie</th>
+                <td>{{ frais_gen.categorie }}</td>
+            </tr>
+            <tr>
+                <th>Lieu</th>
+                <td>{{ frais_gen.lieu }}</td>
+            </tr>
+            <tr>
+                <th>Montant</th>
+                <td>{{ frais_gen.montant }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('frais_gen_index') }}">back to list</a>
+
+    <a href="{{ path('frais_gen_edit', {'id': frais_gen.id}) }}">edit</a>
+
+    {{ include('frais_gen/_delete_form.html.twig') }}
+{% endblock %}
