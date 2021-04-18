@@ -1,0 +1,39 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}NoteFraisAnnuelle index{% endblock %}
+
+{% block body %}
+    <h1>NoteFraisAnnuelle index</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Annee</th>
+                <th>Montant</th>
+                <th>actions</th>
+            </tr>
+        </thead>
+        <tbody>
+        {% for note_frais_annuelle in note_frais_annuelles %}
+            <tr>
+                <td>{{ note_frais_annuelle.id }}</td>
+                <td>{{ note_frais_annuelle.annee }}</td>
+                <td>{{ note_frais_annuelle.total }}</td>
+                <td>{{ note_frais_annuelle.montant }}</td>
+                <td>
+                <td>
+                    <a href="{{ path('note_frais_annuelle_show', {'id': note_frais_annuelle.id}) }}">show</a>
+                    <a href="{{ path('note_frais_annuelle_edit', {'id': note_frais_annuelle.id}) }}">edit</a>
+                </td>
+            </tr>
+        {% else %}
+            <tr>
+                <td colspan="4">no records found</td>
+            </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+
+    <a href="{{ path('note_frais_annuelle_new') }}">Create new</a>
+{% endblock %}

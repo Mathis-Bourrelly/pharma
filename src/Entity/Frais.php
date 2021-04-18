@@ -41,7 +41,7 @@ class Frais
     /**
      * @ORM\ManyToOne(targetEntity=NoteFraisMois::class, inversedBy="frais")
      */
-    private $noteFraisMois;
+    private $NoteFraisMois;
 
     /**
      * @ORM\OneToMany(targetEntity=FraisGen::class, mappedBy="frais")
@@ -53,6 +53,17 @@ class Frais
      */
     private $validation;
 
+    /**
+     * @ORM\ManyToOne(targetEntity=NoteFraisAnnuelle::class, inversedBy="frais")
+     */
+    private $NoteFraisAnnuelle;
+
+    /**
+     * @ORM\Column(type="boolean", nullable=true)
+     */
+    private $valide;
+
+
     public function __construct()
     {
         $this->fraiskm = new ArrayCollection();
@@ -60,23 +71,11 @@ class Frais
     }
     public function __toString()
     {
-        return (string) $this->id;
+        return (string) $this->NoteFraisMois.$this->NoteFraisAnnuelle;
     }
     public function getId(): ?int
     {
         return $this->id;
-    }
-
-    public function getDate(): ?\DateTimeInterface
-    {
-        return $this->date;
-    }
-
-    public function setDate(\DateTimeInterface $date): self
-    {
-        $this->date = $date;
-
-        return $this;
     }
 
     public function getUser(): ?User
@@ -136,12 +135,12 @@ class Frais
 
     public function getNoteFraisMois(): ?NoteFraisMois
     {
-        return $this->noteFraisMois;
+        return $this->NoteFraisMois;
     }
 
-    public function setNoteFraisMois(?NoteFraisMois $noteFraisMois): self
+    public function setNoteFraisMois(?NoteFraisMois $NoteFraisMois): self
     {
-        $this->noteFraisMois = $noteFraisMois;
+        $this->NoteFraisMois = $NoteFraisMois;
 
         return $this;
     }
@@ -206,6 +205,30 @@ class Frais
     public function setValidation(?bool $validation): self
     {
         $this->validation = $validation;
+
+        return $this;
+    }
+
+    public function getNoteFraisAnnuelle(): ?NoteFraisAnnuelle
+    {
+        return $this->NoteFraisAnnuelle;
+    }
+
+    public function setNoteFraisAnnuelle(?NoteFraisAnnuelle $NoteFraisAnnuelle): self
+    {
+        $this->NoteFraisAnnuelle = $NoteFraisAnnuelle;
+
+        return $this;
+    }
+
+    public function getValide(): ?bool
+    {
+        return $this->valide;
+    }
+
+    public function setValide(?bool $valide): self
+    {
+        $this->valide = $valide;
 
         return $this;
     }

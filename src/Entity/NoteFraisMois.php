@@ -43,7 +43,10 @@ class NoteFraisMois
     {
         $this->frais = new ArrayCollection();
     }
-
+    public function __toString(): ?string
+    {
+        return (string) $this->mois;
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -113,5 +116,14 @@ class NoteFraisMois
         $this->noteFraisAnnuelle = $noteFraisAnnuelle;
 
         return $this;
+    }
+    public function total(): ?float
+    {
+        $total=0;
+        foreach ($this->frais as $fr)
+        {
+            $total+=$fr->getMontant();
+        }
+        return $total;
     }
 }

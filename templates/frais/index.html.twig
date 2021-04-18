@@ -20,7 +20,7 @@
             <tr>
                 <td>{{ frai.id }}</td>
                 <td>{{ frai.user }}</td>
-                <td>{{ frai.date ? frai.date|date('Y-m-d H:i:s') : '' }}</td>
+                <td>{{ frai.noteFraisMois }}</td>
                 <td>{{ frai.total }}</td>
                 <td>
                     <a href="{{ path('frais_show', {'id': frai.id}) }}">show</a>

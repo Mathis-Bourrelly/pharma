@@ -25,7 +25,7 @@ class NoteFraisAnnuelle
     private $NoteFraisMois;
 
     /**
-     * @ORM\Column(type="date")
+     * @ORM\Column(type="string")
      */
     private $annee;
 
@@ -34,11 +34,20 @@ class NoteFraisAnnuelle
      */
     private $montant;
 
+    /**
+     * @ORM\OneToMany(targetEntity=Frais::class, mappedBy="NoteFraisAnnuelle")
+     */
+    private $frais;
+
     public function __construct()
     {
         $this->NoteFraisMois = new ArrayCollection();
+        $this->frais = new ArrayCollection();
     }
-
+    public function __toString()
+    {
+        return (string) $this->annee;
+    }
     public function getId(): ?int
     {
         return $this->id;
@@ -74,12 +83,12 @@ class NoteFraisAnnuelle
         return $this;
     }
 
-    public function getAnnee(): ?\DateTimeInterface
+    public function getAnnee(): ?string
     {
         return $this->annee;
     }
 
-    public function setAnnee(\DateTimeInterface $annee): self
+    public function setAnnee(string $annee): self
     {
         $this->annee = $annee;
 
@@ -96,5 +105,44 @@ class NoteFraisAnnuelle
         $this->montant = $montant;
 
         return $this;
+    }
+
+    /**
+     * @return Collection|Frais[]
+     */
+    public function getFrais(): Collection
+    {
+        return $this->frais;
+    }
+
+    public function addFrai(Frais $frai): self
+    {
+        if (!$this->frais->contains($frai)) {
+            $this->frais[] = $frai;
+            $frai->setNoteFraisAnnuelle($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFrai(Frais $frai): self
+    {
+        if ($this->frais->removeElement($frai)) {
+            // set the owning side to null (unless already changed)
+            if ($frai->getNoteFraisAnnuelle() === $this) {
+                $frai->setNoteFraisAnnuelle(null);
+            }
+        }
+
+        return $this;
+    }
+    public function total()
+    {
+        $total=0;
+        foreach ($this->frais as $fr)
+        {
+            $total+=$fr->getMontant();
+        }
+        return $total;
     }
 }

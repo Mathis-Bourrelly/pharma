@@ -7,14 +7,15 @@
     <table class="table">
         <thead>
         <th>Id</th>
-        <th>Date</th>
+        <th>mois</th>
         <th>Montant</th>
         <th>Distance</th>
         </thead>
         <tbody>
         <tr>
             <td>{{ frai.id }}</td>
-            <td>{{ frai.date ? frai.date|date('Y-m-d H:i:s') : '' }}</td>
+            <td>{{ frai.NoteFraisMois }}</td>
+            <td>{{ frai.NoteFraisAnnuelle }}</td>
             <td>{{ frai.total }}</td>
             <td>{{ frai.km }} km</td>
         </tr>
@@ -26,10 +27,16 @@
     <div class="row">
         <div class="col-sm-6">
             <p>
-                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseKm" role="button" aria-expanded="false" aria-controls="collapseKm">
-                    Voir Frais kilométrique
+                <a class="btn btn-secondary" data-bs-toggle="collapse" href="#collapseKm" role="button" aria-expanded="false" aria-controls="collapseKm">
+                    Voir Frais Kilométrique
                 </a>
             </p>
+            <p>
+                <a class="btn btn-primary" role="button" href="{{ path('frais_km_new') }}">
+                    Ajouter Frais Kilometrique
+                </a>
+            </p>
+
             <div class="collapse" id="collapseKm">
                 <div class="card card-body">
                     <h1>Frais Kilométrique</h1>
@@ -72,8 +79,13 @@
 
         <div class="col-sm-6">
             <p>
-                <a class="btn btn-primary" data-bs-toggle="collapse" href="#collapseGen" role="button" aria-expanded="false" aria-controls="collapseGen">
+                <a class="btn btn-secondary" data-bs-toggle="collapse" href="#collapseGen" role="button" aria-expanded="false" aria-controls="collapseGen">
                     Voir Frais Générique
+                </a>
+            </p>
+            <p>
+                <a class="btn btn-primary" role="button" href="{{ path('frais_gen_new') }}">
+                    Ajouter Frais Générique
                 </a>
             </p>
             <div class="collapse" id="collapseGen">
