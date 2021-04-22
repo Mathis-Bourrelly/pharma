@@ -19,11 +19,6 @@ class Frais
     private $id;
 
     /**
-     * @ORM\Column(type="datetime")
-     */
-    private $date;
-
-    /**
      * @ORM\ManyToOne(targetEntity=User::class, inversedBy="frais")
      */
     private $user;
@@ -41,7 +36,7 @@ class Frais
     /**
      * @ORM\ManyToOne(targetEntity=NoteFraisMois::class, inversedBy="frais")
      */
-    private $NoteFraisMois;
+    private $noteFraisMois;
 
     /**
      * @ORM\OneToMany(targetEntity=FraisGen::class, mappedBy="frais")
@@ -56,7 +51,7 @@ class Frais
     /**
      * @ORM\ManyToOne(targetEntity=NoteFraisAnnuelle::class, inversedBy="frais")
      */
-    private $NoteFraisAnnuelle;
+    private $noteFraisAnnuelle;
 
     /**
      * @ORM\Column(type="boolean", nullable=true)
@@ -71,7 +66,7 @@ class Frais
     }
     public function __toString()
     {
-        return (string) $this->NoteFraisMois.$this->NoteFraisAnnuelle;
+        return (string) $this->noteFraisMois.$this->noteFraisAnnuelle;
     }
     public function getId(): ?int
     {
@@ -135,12 +130,12 @@ class Frais
 
     public function getNoteFraisMois(): ?NoteFraisMois
     {
-        return $this->NoteFraisMois;
+        return $this->noteFraisMois;
     }
 
-    public function setNoteFraisMois(?NoteFraisMois $NoteFraisMois): self
+    public function setNoteFraisMois(?NoteFraisMois $noteFraisMois): self
     {
-        $this->NoteFraisMois = $NoteFraisMois;
+        $this->noteFraisMois = $noteFraisMois;
 
         return $this;
     }
@@ -211,12 +206,12 @@ class Frais
 
     public function getNoteFraisAnnuelle(): ?NoteFraisAnnuelle
     {
-        return $this->NoteFraisAnnuelle;
+        return $this->noteFraisAnnuelle;
     }
 
-    public function setNoteFraisAnnuelle(?NoteFraisAnnuelle $NoteFraisAnnuelle): self
+    public function setNoteFraisAnnuelle(?NoteFraisAnnuelle $noteFraisAnnuelle): self
     {
-        $this->NoteFraisAnnuelle = $NoteFraisAnnuelle;
+        $this->noteFraisAnnuelle = $noteFraisAnnuelle;
 
         return $this;
     }

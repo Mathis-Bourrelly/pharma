@@ -12,21 +12,48 @@
             <th>Utilisateur</th>
             <th>Date</th>
             <th>Montant</th>
+            <th>En validation</th>
+            <th>Validé</th>
             <th>actions</th>
         </tr>
         </thead>
         <tbody>
         {% for frai in frais %}
-            <tr>
+            {% if app.user.username == frai.user or (app.user.username == 'valideur@gmail.com' and frai.validation == 1) %}
+                <tr>
                 <td>{{ frai.id }}</td>
                 <td>{{ frai.user }}</td>
                 <td>{{ frai.noteFraisMois }}</td>
                 <td>{{ frai.total }}</td>
+                <td>{% if frai.validation == false %}
+                        non envoyer
+                    {% elseif frai.validation == true %}
+                        envoyer
+                    {% else %}
+                        en attente
+                    {% endif %}
+                </td>
+                <td>
+                    {% if frai.valide == false %}
+                        refuser
+                    {% elseif frai.valide == true %}
+                        valider
+                    {% else %}
+                        en attente
+                    {% endif %}
+                </td>
                 <td>
                     <a href="{{ path('frais_show', {'id': frai.id}) }}">show</a>
-                    <a href="{{ path('frais_edit', {'id': frai.id}) }}">edit</a>
+                    {% if frai.validation == 0 or is_granted('ROLE_VALIDEUR')%}
+                        <a href="{{ path('frais_edit', {'id': frai.id}) }}">edit</a>
+                    {% endif %}
+                    {% if is_granted('ROLE_VALIDEUR')%}
+                        <a href="{{ path('frais_valider', {'id': frai.id}) }}">valider</a>
+                        <a href="{{ path('frais_refuser', {'id': frai.id}) }}">refuser</a>
+                    {% endif %}
                 </td>
             </tr>
+            {% endif %}
         {% else %}
             <tr>
                 <td colspan="3">no records found</td>
@@ -34,5 +61,7 @@
         {% endfor %}
         </tbody>
     </table>
+    {% if not is_granted('ROLE_VALIDEUR') %}
     <a href="{{ path('frais_new') }}">Create new</a>
+    {% endif %}
 {% endblock %}

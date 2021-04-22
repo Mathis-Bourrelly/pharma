@@ -13,8 +13,8 @@ class FraisType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder
-            ->add('NoteFraisMois')
-            ->add('NoteFraisAnnuelle')
+            ->add('noteFraisMois')
+            ->add('noteFraisAnnuelle')
             ->add('user')
             ->add('montant')
             ->add('validation',CheckboxType::class,['required'=> false]);
@@ -27,3 +27,7 @@ class FraisType extends AbstractType
         ]);
     }
 }
+
+/**
+ * , 'is_granted_attribute'=>'ROLE_VALIDEUR'
+ */

@@ -91,4 +91,26 @@ class FraisController extends AbstractController
 
         return $this->redirectToRoute('frais_index');
     }
+    /**
+     * @Route("/{id}/valider", name="frais_valider", methods={"GET"})
+     */
+    public function valider(Request $request, Frais $frai): Response
+    {
+        $frai->setValide(true);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($frai);
+        $entityManager->flush();
+        return $this->redirectToRoute('frais_index');
+    }
+    /**
+     * @Route("/{id}/refuser", name="frais_refuser", methods={"GET"})
+     */
+    public function refuser(Request $request, Frais $frai): Response
+    {
+        $frai->setValide(false);
+        $entityManager = $this->getDoctrine()->getManager();
+        $entityManager->persist($frai);
+        $entityManager->flush();
+        return $this->redirectToRoute('frais_index');
+    }
 }

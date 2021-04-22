@@ -35,13 +35,13 @@ class NoteFraisAnnuelle
     private $montant;
 
     /**
-     * @ORM\OneToMany(targetEntity=Frais::class, mappedBy="NoteFraisAnnuelle")
+     * @ORM\OneToMany(targetEntity=Frais::class, mappedBy="noteFraisAnnuelle")
      */
     private $frais;
 
     public function __construct()
     {
-        $this->NoteFraisMois = new ArrayCollection();
+        $this->noteFraisMois = new ArrayCollection();
         $this->frais = new ArrayCollection();
     }
     public function __toString()
@@ -63,8 +63,8 @@ class NoteFraisAnnuelle
 
     public function addNoteFraisMoi(NoteFraisMois $noteFraisMoi): self
     {
-        if (!$this->NoteFraisMois->contains($noteFraisMoi)) {
-            $this->NoteFraisMois[] = $noteFraisMoi;
+        if (!$this->noteFraisMois->contains($noteFraisMoi)) {
+            $this->noteFraisMois[] = $noteFraisMoi;
             $noteFraisMoi->setNoteFraisAnnuelle($this);
         }
 
@@ -73,7 +73,7 @@ class NoteFraisAnnuelle
 
     public function removeNoteFraisMoi(NoteFraisMois $noteFraisMoi): self
     {
-        if ($this->NoteFraisMois->removeElement($noteFraisMoi)) {
+        if ($this->noteFraisMois->removeElement($noteFraisMoi)) {
             // set the owning side to null (unless already changed)
             if ($noteFraisMoi->getNoteFraisAnnuelle() === $this) {
                 $noteFraisMoi->setNoteFraisAnnuelle(null);

@@ -9,22 +9,62 @@
         <tbody>
             <tr>
                 <th>Id</th>
-                <td>{{ note_frais_moi.id }}</td>
+                <td>{{ noteFraisMois.id }}</td>
             </tr>
             <tr>
                 <th>Mois</th>
-                <td>{{ note_frais_moi.mois }}</td>
+                <td>{{ noteFraisMois.mois }}</td>
             </tr>
             <tr>
                 <th>Montant</th>
-                <td>{{ note_frais_moi.montant }}</td>
+                <td>{{ noteFraisMois.montant }}</td>
             </tr>
         </tbody>
     </table>
+    <p>
+        <a class="btn btn-secondary" data-bs-toggle="collapse" href="#collapseFrais" role="button" aria-expanded="false" aria-controls="collapseFrais">
+            Voir Frais de {{ noteFraisMois.mois }} {{ noteFraisMois.noteFraisAnnuelle }}
+        </a>
+    </p>
+    <p>
+        <a class="btn btn-primary" role="button" href="{{ path('frais_new') }}">
+            Ajouter Frais
+        </a>
+    </p>
+{{ frais|length }}
+    {# % for frai in noteFraisMois.frais %}
+        <tr>
+            <td>{{ frai.id }}</td>
+            <td>
+                <a href="{{ path('frais_show', {'id': frai.id}) }}">show</a>
+                <a href="{{ path('frais_edit', {'id': frai.id}) }}">edit</a>
+            </td>
+        </tr>
+    {% else %}
+        <tr>
+            <td colspan="7">no records found</td>
+        </tr>
+    {% endfor %}# #}
+
+    <div class="collapse" id="collapseFrais">
+        <div class="card card-body">
+            <h1>Frais </h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                </tr>
+                </thead>
+                <tbody>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    </div>
 
     <a href="{{ path('note_frais_mois_index') }}">back to list</a>
 
-    <a href="{{ path('note_frais_mois_edit', {'id': note_frais_moi.id}) }}">edit</a>
+    <a href="{{ path('note_frais_mois_edit', {'id': noteFraisMois.id}) }}">edit</a>
 
-    {{ include('note_frais_mois/_delete_form.html.twig') }}
+    {# { include('note_frais_mois/_delete_form.html.twig') }#}
 {% endblock %}

@@ -35,7 +35,7 @@ class NoteFraisMois
     private $frais;
 
     /**
-     * @ORM\ManyToOne(targetEntity=NoteFraisAnnuelle::class, inversedBy="NoteFraisMois")
+     * @ORM\ManyToOne(targetEntity=NoteFraisAnnuelle::class, inversedBy="noteFraisMois")
      */
     private $noteFraisAnnuelle;
 
@@ -43,7 +43,7 @@ class NoteFraisMois
     {
         $this->frais = new ArrayCollection();
     }
-    public function __toString(): ?string
+    public function __toString()
     {
         return (string) $this->mois;
     }
@@ -117,7 +117,7 @@ class NoteFraisMois
 
         return $this;
     }
-    public function total(): ?float
+    public function total()
     {
         $total=0;
         foreach ($this->frais as $fr)

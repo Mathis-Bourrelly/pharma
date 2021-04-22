@@ -53,8 +53,10 @@ class NoteFraisMoisController extends AbstractController
      */
     public function show(NoteFraisMois $noteFraisMoi): Response
     {
+        dump($noteFraisMoi);
         return $this->render('note_frais_mois/show.html.twig', [
-            'note_frais_moi' => $noteFraisMoi,
+            'noteFraisMois' => $noteFraisMoi,
+            'frais'=>$noteFraisMoi->getFrais()
         ]);
     }
 
